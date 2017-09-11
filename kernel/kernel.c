@@ -18,7 +18,7 @@ void kernel_main(multiboot_info_t* mb) {
 
 	mmap(mb);
 
-	for (size_t i = 0; i < 160; i++) {
+	for (size_t i = 0; i < 32599; i++) {
 		vga_print_string(itoa_hex((unsigned int) allocate_pframe())); vga_print_newline();
 	}
 	free_pframe(0);

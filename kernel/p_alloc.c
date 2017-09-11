@@ -20,6 +20,10 @@ static uint8_t check_bit(uint8_t* byte, unsigned int bit) {
 } 
 
 uint32_t allocate_pframe(void) {
+	if (pages_allocated >= total_pages) {
+		vga_print_string("Out of memory!\n");
+		return 0x100000; //Error code since this is the start of the kernel
+	}
 	uint8_t* curr_bitmap = free_mmap[current_mem_zone].bitmap + block_counter;  
 	while ((free_mmap[current_mem_zone].base + (block_counter * PAGE_SIZE * 8)) < free_mmap[current_mem_zone].end) {
 		for (size_t i = 0; i < 8; i++) {
@@ -54,9 +58,11 @@ void free_pframe(uint32_t pframe) {
 			unsigned int bit_position = (pframe - ((block_position * PAGE_SIZE * 8) + free_mmap[i].base)) / PAGE_SIZE; 
 			if (i <= current_mem_zone && block_position < block_counter) {
 				current_mem_zone = i;
-				block_counter = block_position; //So it starts searching from the place where the last page was freed
+				block_counter = block_position; //So it starts searching from the earliest place where the last page was freed
 			}
 			clear_bit(bmp + block_position, bit_position);
+			pages_allocated--;
+			return;
 		}
 	}
 }
