@@ -57,7 +57,6 @@ void free_pframe(uint32_t pframe) {
 			size_t block_position = (pframe - free_mmap[i].base) / (PAGE_SIZE * 8);
 			unsigned int bit_position = (pframe - ((block_position * PAGE_SIZE * 8) + free_mmap[i].base)) / PAGE_SIZE; 
 			if (i < current_mem_zone || (i == current_mem_zone &&block_position < block_counter)) {
-				//vga_print_string(itoa_d(i)); vga_print_string("   "); vga_print_string(itoa_d(block_position)); vga_print_string("\n");
 				current_mem_zone = i;
 				block_counter = block_position; //So it starts searching from the earliest place where the last page was freed
 			}
