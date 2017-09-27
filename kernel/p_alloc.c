@@ -56,7 +56,7 @@ void free_pframe(uint32_t pframe) {
 			uint8_t* bmp = free_mmap[i].bitmap;
 			size_t block_position = (pframe - free_mmap[i].base) / (PAGE_SIZE * 8);
 			unsigned int bit_position = (pframe - ((block_position * PAGE_SIZE * 8) + free_mmap[i].base)) / PAGE_SIZE; 
-			if (i < current_mem_zone || (i == current_mem_zone &&block_position < block_counter)) {
+			if (i < current_mem_zone || (i == current_mem_zone && block_position < block_counter)) {
 				current_mem_zone = i;
 				block_counter = block_position; //So it starts searching from the earliest place where the last page was freed
 			}
