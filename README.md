@@ -22,7 +22,7 @@ LiteweightOS is currently under development, meaning new features and supports a
 package includes just the kernel and basic hardware utilities, but the goal is to eventually expand to full OS support. All
 development and testing is being done using QEMU emulation.
 
-##Ports
+## Ports
 
 LiteweightOS only supports the x86-32 architecture at this stage. Future goals include expanding support to include x86-64
 and eventually RISC-V architectures.
