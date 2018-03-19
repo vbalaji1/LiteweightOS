@@ -25,4 +25,4 @@ development and testing is being done using QEMU emulation.
 ## Ports
 
 LiteweightOS only supports the x86-32 architecture at this stage. Future goals include expanding support to include x86-64
-and eventually RISC-V architectures.
+and ARM architectures.
